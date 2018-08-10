@@ -66,7 +66,7 @@ export default class extends React.Component {
                     <Button
                     raised
                     icon={{name: 'cached'}}
-                    title='BUTTON WITH ICON'
+                    title='SUBMIT'
                     backgroundColor="#2a6edc" />
                   </View>
 

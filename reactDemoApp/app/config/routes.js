@@ -5,6 +5,7 @@ import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } 
 //Splash Component
 import Home from '../modules/Home/Home';
 import ProgramList from '../modules/ProgramList/ProgramList';
+import Calendar from '../modules/Calendar/Calendar';
 
 class Routes extends React.Component {
 
@@ -75,6 +76,21 @@ const FirstActivity_StackNavigator = StackNavigator({
     },
   });
 
+  const ThirdActivity_StackNavigator = StackNavigator({
+    Third: {
+      screen: Calendar,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Calendar',
+        headerLeft : <Routes navigationProps={ navigation }/>,
+
+        headerStyle: {
+          backgroundColor: '#2a6edc'
+        },
+        headerTintColor: '#fff',
+      })
+    },
+  });
+
 
 export default MyDrawerNavigator = DrawerNavigator({
 CrudOperation: {
@@ -83,6 +99,10 @@ CrudOperation: {
 
 VideoListing: {
   screen: SecondActivity_StackNavigator
+},
+
+CalendarView: {
+  screen: ThirdActivity_StackNavigator
 }
 });
 

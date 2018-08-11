@@ -35,7 +35,7 @@ class Routes extends React.Component {
 
         <Image
           source={{uri : 'https://reactnativecode.com/wp-content/uploads/2018/04/hamburger_icon.png'}}
-          style={{ width: 25, height: 25, marginLeft: 5}}
+          style={{ width: 25, height: 25, marginLeft: 10}}
         />
 
       </TouchableOpacity>
@@ -93,15 +93,15 @@ const FirstActivity_StackNavigator = StackNavigator({
 
 
 export default MyDrawerNavigator = DrawerNavigator({
-CrudOperation: {
+Program: {
   screen: FirstActivity_StackNavigator
 },
 
-VideoListing: {
+Video: {
   screen: SecondActivity_StackNavigator
 },
 
-CalendarView: {
+Calendar: {
   screen: ThirdActivity_StackNavigator
 }
 });

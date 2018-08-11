@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, Modal ,TouchableHighlight} from 'react-native';
 import { Button, Badge ,Icon, FormLabel, FormInput, FormValidationMessage, Card, ListItem} from 'react-native-elements';
 
+// import firebase from 'react-native-firebase';
+
 export default class extends React.Component {
   state = {
     modalVisible: false,

@@ -4,20 +4,32 @@ import { Button, Badge ,Icon, FormLabel, FormInput, FormValidationMessage, Card,
 
 import { database } from "../../config/firebase";
 export default class extends React.Component {
+
+  constructor(props) {
+        super(props);
+        this.videoRef = database.ref().child('videos');
+        YellowBox.ignoreWarnings([
+         'Warning: componentWillMount is deprecated',
+         'Warning: componentWillReceiveProps is deprecated',
+       ]);
+      }
+
   state = {
     modalVisible: false,
     videoModalVisible : false,
     videoName : '',
     description : '',
     videUrl : '',
-    videoArray:[],
-  };
+    videoArray : [],
+    modalData : {}
+  }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
-  setVideoModalVisible(visible) {
+  setVideoModalVisible(visible, l) {
+    l ? this.setState({modalData : l}) : '';
     this.setState({videoModalVisible: visible});
   }
 
@@ -31,41 +43,16 @@ export default class extends React.Component {
     this.setModalVisible(false);
   }
 
-  getVideos(){
-    this.videoRef.on('value', function(snapshot) {
-      const temp = [];
-      snapshot.forEach(function (val) {
-        temp.push(val.val());
-      })
-      this.videoArray = temp;
-  });
+  componentDidMount() {
+      this.videoRef.on('value', (snapshot) =>{
+      const  videoArray = Object.values(snapshot.val());
+      this.setState({videoArray});
+    });
   }
-
-  constructor(props) {
-
-        super(props);
-        this.videoRef = database.ref().child('videos');
-        YellowBox.ignoreWarnings([
-         'Warning: componentWillMount is deprecated',
-         'Warning: componentWillReceiveProps is deprecated',
-       ]);
-       this.getVideos();
-      }
 
          render()
          {
-           const list = [
-            {
-              name: 'Amy Farha',
-              avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-              subtitle: 'Vice President'
-            },
-            {
-              name: 'Chris Jackson',
-              avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-              subtitle: 'Vice Chairman'
-            },
-          ]
+           const list = this.state.videoArray
             return(
                <View>
                <View style={{marginTop: 22}}>
@@ -130,7 +117,7 @@ export default class extends React.Component {
                           key={l.name}
                           title={l.name}
                           onPress={() => {
-                          this.setVideoModalVisible(true);
+                          this.setVideoModalVisible(true, l);
                           }}
                         />
                       ))
@@ -160,15 +147,19 @@ export default class extends React.Component {
                       </TouchableHighlight>
                       <View>
                       <View style={{ height: 300 }}>
-
-                        <WebView
-                                style={ styles.WebViewContainer }
-                                javaScriptEnabled={true}
-                                domStorageEnabled={true}
-                                source={{uri: 'https://www.youtube.com/embed/dFKhWe2bBkM' }}
-                        />
-
-                          </View>
+                          <Text style={{ fontWeight: 'bold', fontSize:20, marginLeft:18, marginBottom :10 }}>
+                          {this.state.modalData.name}
+                          </Text>
+                            <WebView
+                                    style={ styles.WebViewContainer }
+                                    javaScriptEnabled={true}
+                                    domStorageEnabled={true}
+                                    source={{uri: this.state.modalData.url }}
+                            />
+                            <Text style={{fontSize:15,margin:15,color:'#4b4b4b'}}>
+                            {this.state.modalData.description}
+                            </Text>
+                        </View>
                       </View>
                     </View>
                     </View>

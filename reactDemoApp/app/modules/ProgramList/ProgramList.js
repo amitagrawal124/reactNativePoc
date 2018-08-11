@@ -2,10 +2,15 @@ import React from 'react';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, Modal ,TouchableHighlight, WebView} from 'react-native';
 import { Button, Badge ,Icon, FormLabel, FormInput, FormValidationMessage, Card, ListItem, List} from 'react-native-elements';
 
+import { database } from "../../config/firebase";
 export default class extends React.Component {
   state = {
     modalVisible: false,
     videoModalVisible : false,
+    videoName : '',
+    description : '',
+    videUrl : '',
+    videoArray:[],
   };
 
   setModalVisible(visible) {
@@ -16,15 +21,35 @@ export default class extends React.Component {
     this.setState({videoModalVisible: visible});
   }
 
+  setFormData(name, description, url){
+    const dataToSend = {
+      name : name,
+      description : description,
+      url : url
+    }
+    this.videoRef.push(dataToSend)
+    this.setModalVisible(false);
+  }
+
+  getVideos(){
+    this.videoRef.on('value', function(snapshot) {
+      const temp = [];
+      snapshot.forEach(function (val) {
+        temp.push(val.val());
+      })
+      this.videoArray = temp;
+  });
+  }
+
   constructor(props) {
 
         super(props);
-
+        this.videoRef = database.ref().child('videos');
         YellowBox.ignoreWarnings([
          'Warning: componentWillMount is deprecated',
          'Warning: componentWillReceiveProps is deprecated',
        ]);
-
+       this.getVideos();
       }
 
          render()
@@ -67,16 +92,19 @@ export default class extends React.Component {
 
                     <View>
                       <FormLabel>Video Name</FormLabel>
-                        <FormInput/>
+                        <FormInput onChangeText={(videoName) => this.setState({videoName})}/>
                       <FormLabel>Description</FormLabel>
-                        <FormInput/>
+                        <FormInput onChangeText={(description) => this.setState({description})}/>
                       <FormLabel>Video Url</FormLabel>
-                        <FormInput/>
+                        <FormInput onChangeText={(videoUrl) => this.setState({videoUrl})}/>
                       <Button
                       raised
                       icon={{name: 'cached'}}
                       title='ADD'
-                      backgroundColor="#2a6edc" />
+                      backgroundColor="#2a6edc"
+                      onPress={() => {
+                      this.setFormData(this.state.videoName, this.state.description, this.state.videoUrl);
+                      }} />
                     </View>
 
                   </View>

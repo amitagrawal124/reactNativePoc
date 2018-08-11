@@ -1,27 +1,49 @@
 import React from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, Modal ,TouchableHighlight} from 'react-native';
+import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, Modal ,TouchableHighlight, TextInput} from 'react-native';
 import { Button, Badge ,Icon, FormLabel, FormInput, FormValidationMessage, Card, ListItem} from 'react-native-elements';
 
-// import firebase from 'react-native-firebase';
+import { database } from "../../config/firebase";
 
 export default class extends React.Component {
   state = {
     modalVisible: false,
+    programName:'',
+    description : '',
   };
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
+  setFormData(name, description) {
+    const dataToSend = {
+      name : name,
+      description : description,
+    }
+    this.programRef.push(dataToSend)
+    this.setModalVisible(false);
+  }
+
+  getVideos(){
+    this.programRef.on('value', function(snapshot) {
+      const temp = [];
+      snapshot.forEach(function (val) {
+        temp.push(val.val());
+      })
+      this.programArray = temp;
+  });
+  }
+
   constructor(props) {
 
         super(props);
-
+        this.programRef = database.ref().child('programs');
         YellowBox.ignoreWarnings([
          'Warning: componentWillMount is deprecated',
          'Warning: componentWillReceiveProps is deprecated',
        ]);
-
+       this.programArray = [];
+       this.getVideos();
       }
 
          render()
@@ -62,14 +84,22 @@ export default class extends React.Component {
 
                   <View>
                   <FormLabel>Program Name</FormLabel>
-                    <FormInput/>
+                    <FormInput
+                     placeholder="Enter program name"
+                     onChangeText={(programName) => this.setState({programName})}
+                     />
                   <FormLabel>Description</FormLabel>
-                    <FormInput/>
+                    <FormInput
+                    placeholder="Enter description"
+                    onChangeText={(description) => this.setState({description})}/>
                     <Button
                     raised
                     icon={{name: 'cached'}}
                     title='SUBMIT'
-                    backgroundColor="#2a6edc" />
+                    backgroundColor="#2a6edc"
+                    onPress={() => {
+                    this.setFormData(this.state.programName, this.state.description);
+                    }}  />
                   </View>
 
                   </View>
@@ -90,14 +120,14 @@ export default class extends React.Component {
                     title='HELLO WORLD'
                     image={require('./digital-program-code-2271732.jpg')}>
                     <Text style={{marginBottom: 10}}>
-                      The idea with React Native Elements is more about component structure than actual design.
+                      The idea with React Native Elements is more about
+                      component structure than actual design.
                     </Text>
                     <Button
-                      icon={{name: 'code'}}
                       backgroundColor='#03A9F4'
                       fontFamily='RobotoRegular'
                       buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                      title='VIEW NOW' />
+                      title='VIEW DETAILS' />
                   </Card>
                   </View>
                </View>

@@ -49,7 +49,7 @@ const FirstActivity_StackNavigator = StackNavigator({
     First: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        title: 'Crud Operation',
+        title: 'Program',
         headerLeft : <Routes navigationProps={ navigation }/>,
 
         headerStyle: {
@@ -65,7 +65,7 @@ const FirstActivity_StackNavigator = StackNavigator({
     Second: {
       screen: ProgramList,
       navigationOptions: ({ navigation }) => ({
-        title: 'Video Listing',
+        title: 'Videos',
         headerLeft : <Routes navigationProps={ navigation }/>,
 
         headerStyle: {

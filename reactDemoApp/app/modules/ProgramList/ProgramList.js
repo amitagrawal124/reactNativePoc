@@ -1,18 +1,39 @@
 import React from 'react';
-import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox, Modal ,TouchableHighlight, WebView} from 'react-native';
-import { Button, Badge ,Icon, FormLabel, FormInput, FormValidationMessage, Card, ListItem, List} from 'react-native-elements';
+import {
+  StyleSheet,
+  Platform,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  YellowBox,
+  Modal ,
+  TouchableHighlight,
+  WebView
+} from 'react-native';
+import {
+   Button,
+   Badge ,
+   Icon,
+   FormLabel,
+   FormInput,
+   FormValidationMessage,
+   Card,
+   ListItem,
+   List
+ } from 'react-native-elements';
 
 import { database } from "../../config/firebase";
 export default class extends React.Component {
 
   constructor(props) {
-        super(props);
-        this.videoRef = database.ref().child('videos');
-        YellowBox.ignoreWarnings([
-         'Warning: componentWillMount is deprecated',
-         'Warning: componentWillReceiveProps is deprecated',
-       ]);
-      }
+    super(props);
+    this.videoRef = database.ref().child('videos');
+    YellowBox.ignoreWarnings([
+     'Warning: componentWillMount is deprecated',
+     'Warning: componentWillReceiveProps is deprecated',
+   ]);
+  }
 
   state = {
     modalVisible: false,

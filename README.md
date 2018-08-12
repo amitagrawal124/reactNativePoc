@@ -1,5 +1,5 @@
 # reactNativePoc 
-  React Native and firebase integration for real time data
+  React Native app with firebase integration for real time data
   
 ## Installation
 

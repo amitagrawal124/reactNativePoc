@@ -2,7 +2,6 @@ import React from 'react';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
 
-//Splash Component
 import Home from '../modules/Home/Home';
 import ProgramList from '../modules/ProgramList/ProgramList';
 import Calendar from '../modules/Calendar/Calendar';

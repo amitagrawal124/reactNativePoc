@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { color, fontFamily, padding, fontSize } from "../../styles/theme"
+import { color, padding, fontSize } from "../../styles/theme"
 
 const resizeMode = 'contain';
 
@@ -24,13 +24,12 @@ const styles = StyleSheet.create({
         width: 100,
         backgroundColor: color.grey,
         marginBottom: padding,
-        resizeMode
+        resizeMode : 'cover',
     },
 
     title: {
         fontSize:fontSize.large + 5,
         lineHeight:fontSize.large + 7,
-        fontFamily: fontFamily.medium,
         color: "#FF553F",
         letterSpacing: 1
     },

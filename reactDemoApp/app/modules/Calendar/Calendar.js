@@ -17,7 +17,6 @@ export default class CalendarsScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.text}>Calendar with selectable date and arrows</Text>
         <Calendar
           onDayPress={this.onDayPress}
           style={styles.calendar}
@@ -51,6 +50,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'gray'
+    backgroundColor: '#ffffff'
   }
 });

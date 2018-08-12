@@ -67,6 +67,10 @@ export default class extends React.Component {
   componentDidMount() {
       this.videoRef.on('value', (snapshot) =>{
       const  videoArray = Object.values(snapshot.val());
+      videoArray.forEach(function(video) {
+        let youtubeUrlId = video.url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/);
+        video.image = 'http://img.youtube.com/vi/' + youtubeUrlId[2] + '/default.jpg';
+})
       this.setState({videoArray});
     });
   }
@@ -134,7 +138,7 @@ export default class extends React.Component {
                       list.map((l) => (
                         <ListItem
                           roundAvatar
-                          avatar={{uri:l.avatar_url}}
+                          avatar={{uri:l.image}}
                           key={l.name}
                           title={l.name}
                           onPress={() => {

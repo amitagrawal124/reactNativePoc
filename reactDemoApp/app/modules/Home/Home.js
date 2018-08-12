@@ -162,7 +162,7 @@ export default class extends React.Component {
                   </View>
 
                   <View>
-                  <ScrollView>
+                  <ScrollView style={styles.scrollContainer}>
                   {
                     list.map((l) => (
                       <Card
@@ -227,4 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold'
   },
+  scrollContainer :{
+    paddingBottom:100
+  }
 });

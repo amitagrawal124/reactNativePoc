@@ -33,6 +33,7 @@
     "react-native-redux-listener": "^0.3.0",
     "react-native-router-flux": "^4.0.1",
     "react-native-size-matters": "^0.1.2",
+    "react-native-swipeout": "^2.3.6",
     "react-native-video": "^3.2.0",
     "react-native-youtube": "^1.1.0",
     "react-redux": "^5.0.7",

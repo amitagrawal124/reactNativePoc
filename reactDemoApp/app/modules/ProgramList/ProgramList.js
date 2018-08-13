@@ -24,6 +24,8 @@ import {
  } from 'react-native-elements';
 
 import { database } from "../../config/firebase";
+import Swipeout from 'react-native-swipeout';
+
 export default class extends React.Component {
 
   constructor(props) {
@@ -42,7 +44,8 @@ export default class extends React.Component {
     description : '',
     videUrl : '',
     videoArray : [],
-    modalData : {}
+    modalData : {},
+    selectedListItem : '',
   }
 
   setModalVisible(visible) {
@@ -56,27 +59,43 @@ export default class extends React.Component {
 
   setFormData(name, description, url){
     const dataToSend = {
+      id : Math.random().toString(36).substring(2),
       name : name,
       description : description,
       url : url
     }
-    this.videoRef.push(dataToSend)
+     database.ref('videos/' + dataToSend.id).set(dataToSend);
     this.setModalVisible(false);
   }
 
-  componentDidMount() {
+    deleteVideo(item){
+        database.ref('videos/' + item.id).remove();
+        this.componentDidMount();
+    }
+
+  swipeAction(l){
+    this.setState({selectedListItem : l});
+  }
+
+    componentDidMount() {
       this.videoRef.on('value', (snapshot) =>{
       const  videoArray = Object.values(snapshot.val());
       videoArray.forEach(function(video) {
         let youtubeUrlId = video.url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/);
         video.image = 'http://img.youtube.com/vi/' + youtubeUrlId[2] + '/default.jpg';
-})
+      })
       this.setState({videoArray});
     });
   }
 
          render()
          {
+           let swipeBtns = [{
+             text: 'Delete',
+             backgroundColor: '#4d4d4d',
+             underlayColor: '#4d4d4d',
+             onPress: () => { this.deleteVideo(this.state.selectedListItem)}
+           }];
            const list = this.state.videoArray
             return(
                <View>
@@ -136,15 +155,24 @@ export default class extends React.Component {
                   <List containerStyle={{marginBottom: 20}}>
                     {
                       list.map((l) => (
-                        <ListItem
-                          roundAvatar
-                          avatar={{uri:l.image}}
-                          key={l.name}
-                          title={l.name}
-                          onPress={() => {
-                          this.setVideoModalVisible(true, l);
-                          }}
-                        />
+                        <Swipeout right={swipeBtns}
+                          autoClose='true'
+                          backgroundColor= 'transparent'
+                          onOpen={()=>{
+                            this.swipeAction(l);
+                          }}>
+                            <View>
+                            <ListItem
+                              roundAvatar
+                              avatar={{uri:l.image}}
+                              key={l.name}
+                              title={l.name}
+                              onPress={() => {
+                              this.setVideoModalVisible(true, l);
+                              }}
+                            />
+                            </View>
+                        </Swipeout>
                       ))
                     }
                   </List>
@@ -198,9 +226,7 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
 
 WebViewContainer: {
-
     marginTop: (Platform.OS == 'ios') ? 20 : 0,
-
   }
 
 });

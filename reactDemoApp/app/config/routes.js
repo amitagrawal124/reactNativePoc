@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerNavigator, StackNavigator } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { StyleSheet, Platform, View, Text, Image, TouchableOpacity, YellowBox } from 'react-native';
 
 import Home from '../modules/Home/Home';
@@ -44,7 +44,7 @@ class Routes extends React.Component {
   }
 }
 
-const FirstActivity_StackNavigator = StackNavigator({
+const FirstActivity_StackNavigator = createStackNavigator({
     First: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
@@ -60,7 +60,7 @@ const FirstActivity_StackNavigator = StackNavigator({
   });
 
 
-  const SecondActivity_StackNavigator = StackNavigator({
+  const SecondActivity_StackNavigator = createStackNavigator({
     Second: {
       screen: ProgramList,
       navigationOptions: ({ navigation }) => ({
@@ -75,7 +75,7 @@ const FirstActivity_StackNavigator = StackNavigator({
     },
   });
 
-  const ThirdActivity_StackNavigator = StackNavigator({
+  const ThirdActivity_StackNavigator = createStackNavigator({
     Third: {
       screen: Calendar,
       navigationOptions: ({ navigation }) => ({
@@ -91,7 +91,7 @@ const FirstActivity_StackNavigator = StackNavigator({
   });
 
 
-export default MyDrawerNavigator = DrawerNavigator({
+export default MyDrawerNavigator = createDrawerNavigator({
 Program: {
   screen: FirstActivity_StackNavigator
 },

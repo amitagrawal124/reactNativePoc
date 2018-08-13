@@ -64,19 +64,18 @@ export default class extends React.Component {
         name : name,
         description : description
       }
-      this.programRef.push(dataToSend)
+       database.ref('programs/' + dataToSend.id).set(dataToSend);
     }else if (context === 'edit') {
-      const dataToSend = {
+      database.ref('programs/'+ id).update({
         name:name,
         description :description
-      };
-      let updates = {}
-      updates['programs/' + id] = dataToSend;
-      database
-      .ref('programs/'+id)
-      .update(updates);
+      });
     }
     this.setModalVisible(false);
+  }
+
+  deleteProgram(l){
+  database.ref('programs/' + l.id).remove();
   }
 
   componentDidMount() {
@@ -181,12 +180,15 @@ export default class extends React.Component {
                             this.setModalVisible(true);
                             this.editProgramData(l);
                             }}
-                            />
+                          />
                             <Button
                               title="Delete Program"
                               titleStyle={{fontWeight: '500'}}
                               buttonStyle={{backgroundColor: '#2a6edc', borderColor: 'transparent', borderWidth: 0, borderRadius: 30, paddingVertical: 10}}
                               containerStyle={{width: 200, height: 30}}
+                              onPress={() => {
+                              this.deleteProgram(l);
+                              }}
                             />
                           </View>
                       </Card>

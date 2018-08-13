@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
 
 import Router from './app/config/routes'
-import Splash from './app/components/Splash/Splash';
 
 function cacheFonts(fonts) {
     return fonts.map(font => Font.loadAsync(font));
@@ -30,7 +29,7 @@ export default class App extends Component {
 
     render() {
 
-
+      if (!this.state.isReady) {
             return (
                 <AppLoading
                     startAsync={this._loadAssetsAsync}
@@ -39,7 +38,7 @@ export default class App extends Component {
                 />
             );
 
-
+          }
         return (
             <Provider>
                     <Router/>

@@ -142,6 +142,7 @@ export default class extends React.Component {
                   </View>
                   </Modal>
                     <TouchableHighlight
+                      style={{alignItems : 'center'}}
                       onPress={() => {
                       this.setModalVisible(true);
                       }}>

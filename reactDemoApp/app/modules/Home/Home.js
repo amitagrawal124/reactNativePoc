@@ -111,7 +111,6 @@ export default class extends React.Component {
                   }}>
                   <View style={{marginTop: 22}}>
                   <View>
-
                   <TouchableHighlight
                     onPress={() => {
                     this.setModalVisible(!this.state.modalVisible);
@@ -147,20 +146,16 @@ export default class extends React.Component {
                   </View>
                   </View>
                   </Modal>
-                  <TouchableHighlight
-                  style={{alignItems : 'center'}}
-                    onPress={() => {
-                    this.addProgram();
-                    }}>
-                    <View style={{ paddingBottom : 10 }}>
-                    <Badge containerStyle={{ backgroundColor: '#2a6edc'}}>
-                      <Text style={{ color:'#ffffff' }}>Add Program</Text>
-                    </Badge>
-                    </View>
+                  <TouchableHighlight style={styles.addButton}
+                      underlayColor='#ff7043'
+                      onPress={() => {
+                      this.addProgram();
+                      }}>
+                      <Text style={{fontSize: 50, color: 'white'}}>+</Text>
                   </TouchableHighlight>
                   </View>
 
-                  <View style={{paddingBottom:100}}>
+                  <View style={{paddingBottom:30}}>
                   <ScrollView contentContainerStyle={styles.scrollContainer}>
                   {
                     list.map((l) => (
@@ -172,9 +167,15 @@ export default class extends React.Component {
                           </Text>
                           <View style={styles.buttonsContainer}>
                           <Button
-                            title="Edit Program"
+                            title="Edit"
                             titleStyle={{fontWeight: '500'}}
-                            buttonStyle={{backgroundColor: '#2a6edc', borderColor: 'transparent', borderWidth: 0, borderRadius: 30, paddingVertical: 10}}
+                            buttonStyle={{
+                              backgroundColor: '#2a6edc',
+                              borderColor: 'transparent',
+                              borderWidth: 0,
+                              borderRadius: 30,
+                              paddingVertical: 10
+                            }}
                             containerStyle={{width: 200, height: 30}}
                             onPress={() => {
                             this.setModalVisible(true);
@@ -182,10 +183,19 @@ export default class extends React.Component {
                             }}
                           />
                             <Button
-                              title="Delete Program"
+                              title="Delete"
                               titleStyle={{fontWeight: '500'}}
-                              buttonStyle={{backgroundColor: '#2a6edc', borderColor: 'transparent', borderWidth: 0, borderRadius: 30, paddingVertical: 10}}
-                              containerStyle={{width: 200, height: 30}}
+                              buttonStyle={{
+                                backgroundColor: '#2a6edc',
+                                borderColor: 'transparent',
+                                borderWidth: 0,
+                                borderRadius: 30,
+                                paddingVertical: 10
+                              }}
+                              containerStyle={{
+                                width: 200,
+                                height: 30
+                              }}
                               onPress={() => {
                               this.deleteProgram(l);
                               }}
@@ -230,6 +240,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   scrollContainer :{
-    paddingBottom:100,
+    paddingBottom:30,
+  },
+  addButton: {
+    backgroundColor: '#2a6edc',
+    borderColor: '#2a6edc',
+    borderWidth: 1,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 0,
+    right:10,
+    top:430,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    zIndex:1
   }
 });

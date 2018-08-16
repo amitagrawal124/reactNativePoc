@@ -48,7 +48,7 @@ const FirstActivity_StackNavigator = createStackNavigator({
     First: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        title: 'Program',
+        title: 'Programs',
         headerLeft : <Routes navigationProps={ navigation }/>,
 
         headerStyle: {

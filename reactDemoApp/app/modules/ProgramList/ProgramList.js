@@ -141,14 +141,12 @@ export default class extends React.Component {
                   </View>
                   </View>
                   </Modal>
-                    <TouchableHighlight
-                      style={{alignItems : 'center'}}
-                      onPress={() => {
-                      this.setModalVisible(true);
-                      }}>
-                      <Badge containerStyle={{ backgroundColor: '#2a6edc'}}>
-                        <Text style={{ color:'#ffffff' }}>Add Video</Text>
-                      </Badge>
+                    <TouchableHighlight style={styles.addButton}
+                        underlayColor='#ff7043'
+                        onPress={() => {
+                        this.setModalVisible(true);
+                        }}>
+                        <Text style={{fontSize: 50, color: 'white'}}>+</Text>
                     </TouchableHighlight>
                   </View>
 
@@ -228,6 +226,24 @@ const styles = StyleSheet.create({
 
 WebViewContainer: {
     marginTop: (Platform.OS == 'ios') ? 20 : 0,
+  },
+  addButton: {
+    backgroundColor: '#2a6edc',
+    borderColor: '#2a6edc',
+    borderWidth: 1,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 0,
+    right:10,
+    top:430,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    zIndex:1
   }
 
 });

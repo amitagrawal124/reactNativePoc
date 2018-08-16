@@ -144,7 +144,6 @@ export default class extends React.Component {
                     this.setFormData(this.state.programName, this.state.description, this.state.modalContext, this.state.id);
                     }}  />
                   </View>
-
                   </View>
                   </View>
                   </Modal>
@@ -161,8 +160,8 @@ export default class extends React.Component {
                   </TouchableHighlight>
                   </View>
 
-                  <View>
-                  <ScrollView style={styles.scrollContainer}>
+                  <View style={{paddingBottom:100}}>
+                  <ScrollView contentContainerStyle={styles.scrollContainer}>
                   {
                     list.map((l) => (
                       <Card
@@ -231,6 +230,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   scrollContainer :{
-    paddingBottom:100
+    paddingBottom:100,
   }
 });

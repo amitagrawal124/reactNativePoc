@@ -1,17 +1,13 @@
   {
   "expo": {
     "sdkVersion": "27.0.0",
-    "name": "Demo React Native App",
-    "icon": "",
-    "version": "1.0.0",
-    "slug": "demo-reactnative-app",
-    "ios": {
-      "bundleIdentifier": "com.demoApp.rectNativeApp"
-    },
     "android":{
       "package":"com.demoApp.reactnativeApp",
       "versionCode":1,
       "permissions":[]
-    }
+    },
+    "ios": {
+      "bundleIdentifier": "com.demoApp.reactnativeApp"
+    },
   }
 }
